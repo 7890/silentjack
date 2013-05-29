@@ -34,6 +34,11 @@ Options:  -c <port>   Connect to this port
           -h          Show help
 ```
 
+OSC messages
+------------
+
+* http://htmlpreview.github.io/?https://raw.github.com/7890/silentjack_osc/master/asciidoc/silentjack_osc.html
+
 Install on Linux
 ----------------
 
