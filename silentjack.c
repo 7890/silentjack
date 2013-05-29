@@ -276,11 +276,11 @@ void usage()
 	printf("          -g <secs>   Grace period (default 0 seconds)\n");
 	printf("          -v          Enable verbose mode\n");
 	printf("          -q          Enable quiet mode\n");
-	printf("          -o <port>   Set OSC Port for listening (default 7777, ? for random)\n");
-	printf("          -H <port>   Set OSC Host to send to (default 127.0.0.1)\n");
-	printf("          -O <port>   Set OSC Port to send to (default 7778)\n");
+	printf("          -o <port>   Set OSC port for listening (default 7777, ? for random)\n");
+	printf("          -H <port>   Set OSC host to send to (default 127.0.0.1)\n");
+	printf("          -O <port>   Set OSC port to send to (default 7778)\n");
 	printf("          -V          Enable OSC verbose mode\n");
-	printf("          -X          Disable all OSC\n");
+	printf("          -X          Disable all OSC functions\n");
 	printf("          -h          Show help\n");
 
 	exit(1);
