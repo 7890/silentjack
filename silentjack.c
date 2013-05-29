@@ -94,6 +94,11 @@ int nosilence_count = 0;		// Number of seconds of nosilence detected
 int nodynamic_count = 0;		// Number of seconds of no-dynamic detected
 int in_grace = 0;			// Number of seconds left in grace
 
+
+void send_osc_status();
+void send_osc_status_command(int argc, char* argv[]);
+void send_osc_settings(char* remote_id);
+
 /* Read and reset the recent peak sample */
 static
 float read_peak()
@@ -203,6 +208,7 @@ void finish_jack( jack_client_t *client )
 	jack_client_close(client);
 }
 
+/*
 #define MAX_LEN 256
 char *concat_args(int ac, char **av) 
 {
@@ -222,6 +228,7 @@ char *concat_args(int ac, char **av)
 	//printf("cmd args: %s\n", buffer);
 	return buffer;
 }
+*/
 
 static
 void run_command( int argc, char* argv[] )
@@ -234,7 +241,8 @@ void run_command( int argc, char* argv[] )
 
 	status_=STATUS_RUN_COMMAND;
 
-   	if (verbose) printf("running command:\n%s %s\n", argv[0],concat_args(argc,argv));
+   	//if (verbose) printf("running command:\n%s %s\n", argv[0],concat_args(argc,argv));
+	if (verbose) printf("running command:\n%s (args omitted)\n", argv[0]);
 
 	if (enable_osc) send_osc_status_command(argc,argv);
 
