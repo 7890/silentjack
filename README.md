@@ -39,8 +39,11 @@ OSC messages
 
 Open ./asciidoc/silentjack_osc.html in your browser after git clone.
 
-(HTML, TOC not working):
+HTML:
 * http://htmlpreview.github.io/?https://raw.github.com/7890/silentjack_osc/master/asciidoc/silentjack_osc.html
+
+PDF:
+* https://github.com/7890/silentjack_osc/raw/master/asciidoc/silentjack_osc.pdf
 
 Install on Linux
 ----------------
