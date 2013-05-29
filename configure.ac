@@ -25,7 +25,8 @@ AC_CHECK_LIB([mx], [powf])
 # Check for JACK (need 0.100.0 for jack_client_open)
 PKG_CHECK_MODULES(JACK, jack >= 0.100.0)
 
-
+# Check for liblo (needed for OSC)
+PKG_CHECK_MODULES(LO, liblo >= 0.26)
 
 dnl ############## Header and function checks
 AC_HEADER_STDC
