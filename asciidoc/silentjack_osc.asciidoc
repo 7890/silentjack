@@ -32,6 +32,8 @@ git clone git://liblo.git.sourceforge.net/gitroot/liblo/liblo
 
 See example programs `oscsend` and `oscdump`
 
+A small modification will make the oscdump tool ready for shell hacks.
+https://gist.github.com/7890/8d83f887b9dc771dcb00
 
 Many applications are possilbe without using the OSC
 features of silentjack simply by using the 'run command 
