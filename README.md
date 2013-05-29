@@ -37,6 +37,9 @@ Options:  -c <port>   Connect to this port
 OSC messages
 ------------
 
+Open ./asciidoc/silentjack_osc.html in your browser after git clone.
+
+(HTML, TOC not working):
 * http://htmlpreview.github.io/?https://raw.github.com/7890/silentjack_osc/master/asciidoc/silentjack_osc.html
 
 Install on Linux
