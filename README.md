@@ -26,11 +26,11 @@ Options:  -c <port>   Connect to this port
           -g <secs>   Grace period (default 0 seconds)
           -v          Enable verbose mode
           -q          Enable quiet mode
-          -o <port>   Set OSC Port for listening (default 7777, ? for random)
-          -H <port>   Set OSC Host to send to (default 127.0.0.1)
-          -O <port>   Set OSC Port to send to (default 7778)
+          -o <port>   Set OSC port for listening (default 7777, ? for random)
+          -H <port>   Set OSC host to send to (default 127.0.0.1)
+          -O <port>   Set OSC port to send to (default 7778)
           -V          Enable OSC verbose mode
-          -X          Disable all OSC
+          -X          Disable all OSC functions
           -h          Show help
 ```
 
@@ -42,6 +42,5 @@ needs: autoconf, automake, JACK, liblo
 ```
   git clone git://github.com/7890/silentjack_osc.git
   cd silentjack_osc
-  ./autogen.sh
-  make && sudo make install
+  ./autogen.sh && make && sudo make install
 ```
