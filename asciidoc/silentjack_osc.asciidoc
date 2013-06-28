@@ -5,6 +5,10 @@ Open Sound Control (OSC) for silentjack
 :data-uri:
 :lang: en
 
+Last Update:
+sys::[/bin/sh ./asciidoc_time.sh]
+
+
 ****************************************************************************
 The program *silentjack* can be used to listen to *JACK* ports and detect 
 if the audio signal is below or above a defined level (dB) for a defined 
@@ -14,8 +18,14 @@ program via the UDP protocol *OSC*. The library *liblo* is used to
 implement OSC in silentjack.
 ****************************************************************************
 
-silentjack OSC is a derivate of "silentjack - Silence / Dead Air Detector" 
-http://www.aelius.com/njh/silentjack/
+Project home:
+
+* https://github.com/7890/silentjack_osc
+
+silentjack OSC is a derivate of "silentjack - Silence / Dead Air Detector": 
+
+* http://www.aelius.com/njh/silentjack/
+
 
 Prerequisites
 -------------
@@ -34,6 +44,21 @@ See example programs `oscsend` and `oscdump`
 
 A small modification will make the oscdump tool ready for shell hacks.
 https://gist.github.com/7890/8d83f887b9dc771dcb00
+
+Installing silentjack (OSC)
+---------------------------
+
+If all prerequisites are met and the necessary build tools are available, 
+it should be enough to do the following in a directory of choice:
+
+------------------------------------------------------------
+$ git clone git://github.com/7890/silentjack_osc.git
+$ cd silentjack_osc
+$ ./autogen.sh && make && sudo make install
+------------------------------------------------------------
+
+Using silentjack (OSC)
+----------------------
 
 Many applications are possilbe without using the OSC
 features of silentjack simply by using the 'run command 
@@ -65,7 +90,7 @@ Options:  -c <port>   Connect to this port
           -v          Enable verbose mode
           -q          Enable quiet mode
           -o <port>   Set OSC port for listening (default 7777, ? for random)
-          -H <port>   Set OSC host to send to (default 127.0.0.1)
+          -H <host>   Set OSC host to send to (default 127.0.0.1)
           -O <port>   Set OSC port to send to (default 7778)
           -X          Disable all OSC functions
           -h          Show help
@@ -73,7 +98,7 @@ Options:  -c <port>   Connect to this port
 ------------------------------------------------------------
 
 OSC Settings
-------------
+~~~~~~~~~~~~
 The following three settings define how OSC messages are processed.
 
 * Port to start OSC Server and listen for incoming messages
@@ -110,10 +135,6 @@ be read and set while the program is running via OSC.
 Messages sent by silentjack
 ---------------------------
 
-IMPORTANT: for all patterns, a client name `silentjack` is used.
-The patterns will differ if silentjack is started for instance with `-n sj1`.
-An answer would look like `/sj1/...` in that case.
-
 /silentjack/started
 ~~~~~~~~~~~~~~~~~~~
 ------------------------------------------------------------
@@ -132,7 +153,7 @@ Sent on event:
 	silentjack ready for service after startup.
 
 Sent if:
-	not matter if verbose
+	(no restriction)
 
 Example:
 	/silentjack/started ssiifi "silentjack" "7777" 5 0 -40.000000 1
@@ -249,7 +270,7 @@ Sent on event:
 	was started with a command argument (last option).
 	
 Sent if:
-	no matter if verbose
+	(no restriction)
 
 Example:
 	/silentjack/run_cmd sssss "silentjack" "7777" "/usr/local/bin/myscript.sh"
@@ -297,7 +318,7 @@ Sent on event:
 	silentjack was reconfigured or requested to tell the current configuration.
 
 Sent if:
-	no matter if verbose
+	(no restriction)
 
 Example:
 	/silentjack/settings ssiifi "silentjack" "7777" 5 10 -40.000000 1
@@ -319,7 +340,7 @@ Sent on event:
 	This is normally caused by CTRL+C or sending the message `/silentjack/quit`.
 
 Sent if:
-	no matter if verbose
+	(no restriction)
 
 Example:
 	/silentjack/quit ss "silentjack" "7777"
@@ -333,42 +354,11 @@ IMPORTANT: all get/set methods have a free-defined string as
 an additional argument (`req_id`). The string will be repeated in the 
 requested answer from silentjack.
 
-
-//////////////////////////////
-/silentjack/get_status
-~~~~~~~~~~~~~~~~~~~~~~
-------------------------------------------------------------
-Message Pattern:
-	/silentjack/get_status
-
-Parmeters:
-	s: req_id
-
-Action:
-	request silentjack to tell current status.
-	if not started with `-V`, this is for polling the status
-	at the desired rate
-
-Reply: 
-	one of
-	/silentjack/started 		ssiifi
-	/silentjack/not_connected 	ss
-	/silentjack/connected 		ss
-	/silentjack/level 		ssiif
-	/silentjack/silent 		ssf
-	/silentjack/run_cmd 		sss(s*)
-	/silentjack/grace 		ssi
-	/silentjack/quit
-
-------------------------------------------------------------
-//////////////////////////////
-
-
 /silentjack/get_settings
 ~~~~~~~~~~~~~~~~~~~~~~~~
 ------------------------------------------------------------
 Message Pattern:
-	/silentjack/get_settings
+	/silentjack/get_settings s
 
 Parmeters:
 	s: req_id
@@ -393,7 +383,7 @@ Reply:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ------------------------------------------------------------
 Message Pattern:
-	/silentjack/set_trigger_level f
+	/silentjack/set_trigger_level fs
 
 Parameters:
 	f: trigger_level	[db]
@@ -411,7 +401,7 @@ Reply:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ------------------------------------------------------------
 Message Pattern:
-	/silentjack/set_silence_period i
+	/silentjack/set_silence_period is
 
 Parameters:
 	i: silence_period	[sec]
@@ -429,7 +419,7 @@ Reply:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ------------------------------------------------------------
 Message Pattern:
-	/silentjack/set_grace_period i
+	/silentjack/set_grace_period is
 
 Parameters:
 	i: grace_period		[sec]
@@ -447,7 +437,7 @@ Reply:
 ~~~~~~~~~~~~~~~~~~~~~~~
 ------------------------------------------------------------
 Message Pattern:
-	/silentjack/verbose i
+	/silentjack/verbose is
 
 Parameters:
 	i: is_verbose
@@ -502,7 +492,7 @@ When silence is detected, evaluation will start again after a grace
 period of `60` seconds (`-g`).
 
 
-The `oscdump` program is an example client of liblo and can be found there.
+The `oscdump` program is an example client of `liblo` and can be found there.
 It will dump all messages sent by silentjack. 
 
 ------------------------------------------------------------
@@ -534,3 +524,21 @@ drive fade-in / fade-out by precedence rules over an array of inputs.
 *bold*, _italics_, `code`, **strong**, ~superscript-,
 ~subscript~. 
 ///////////////
+
+Download Links
+--------------
+
+Download this document (.pdf):
+sys::[qrencode -o images/qrcode1.png "https://github.com/7890/silentjack_osc/blob/master/asciidoc/silentjack_osc.pdf?raw=true" ]
+image:images/qrcode1.png["https://github.com/7890/silentjack_osc/blob/master/asciidoc/silentjack_osc.pdf?raw=true"]
+
+* https://github.com/7890/silentjack_osc/blob/master/asciidoc/silentjack_osc.pdf?raw=true
+
+Download silentjack_osc (.zip):
+sys::[qrencode -o images/qrcode2.png "https://github.com/7890/silentjack_osc/archive/master.zip" ]
+image:images/qrcode2.png["https://github.com/7890/silentjack_osc/archive/master.zip"]
+
+* https://github.com/7890/silentjack_osc/archive/master.zip
+
+
+
