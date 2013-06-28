@@ -27,7 +27,7 @@ Options:  -c <port>   Connect to this port
           -v          Enable verbose mode
           -q          Enable quiet mode
           -o <port>   Set OSC port for listening (default 7777, ? for random)
-          -H <port>   Set OSC host to send to (default 127.0.0.1)
+          -H <host>   Set OSC host to send to (default 127.0.0.1)
           -O <port>   Set OSC port to send to (default 7778)
           -V          Enable OSC verbose mode
           -X          Disable all OSC functions
