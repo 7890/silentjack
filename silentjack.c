@@ -20,7 +20,7 @@
 
 */
 
-//tb/120922/130529
+//tb/120922/130529/130629
 //osc
 
 #include <stdlib.h>
@@ -273,7 +273,7 @@ void run_command( int argc, char* argv[] )
 static
 void usage()
 {
-	printf("%s version %s OSC\n\n", PACKAGE_NAME, PACKAGE_VERSION);
+	printf("%s version %s OSC 130628\n\n", PACKAGE_NAME, PACKAGE_VERSION);
 	printf("Usage: silentjack [options] [COMMAND [ARG]...]\n");
 	printf("Options:  -c <port>   Connect to this port\n");
 	printf("          -n <name>   Name of this client (default 'silentjack')\n");
@@ -285,7 +285,7 @@ void usage()
 	printf("          -v          Enable verbose mode\n");
 	printf("          -q          Enable quiet mode\n");
 	printf("          -o <port>   Set OSC port for listening (default 7777, ? for random)\n");
-	printf("          -H <port>   Set OSC host to send to (default 127.0.0.1)\n");
+	printf("          -H <host>   Set OSC host to send to (default 127.0.0.1)\n");
 	printf("          -O <port>   Set OSC port to send to (default 7778)\n");
 	printf("          -V          Enable OSC verbose mode\n");
 	printf("          -X          Disable all OSC functions\n");
