@@ -745,6 +745,8 @@ asciidoc.install(2);
 <div id="content">
 <div id="preamble">
 <div class="sectionbody">
+<div class="paragraph"><p>Last Update:
+2013-06-28 22:06:28 +0200</p></div>
 <div class="sidebarblock">
 <div class="content">
 <div class="paragraph"><p>The program <strong>silentjack</strong> can be used to listen to <strong>JACK</strong> ports and detect
@@ -754,8 +756,22 @@ A fork of silentjack was made in order to sense and control the
 program via the UDP protocol <strong>OSC</strong>. The library <strong>liblo</strong> is used to
 implement OSC in silentjack.</p></div>
 </div></div>
-<div class="paragraph"><p>silentjack OSC is a derivate of "silentjack - Silence / Dead Air Detector"
-<a href="http://www.aelius.com/njh/silentjack/">http://www.aelius.com/njh/silentjack/</a></p></div>
+<div class="paragraph"><p>Project home:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="https://github.com/7890/silentjack_osc">https://github.com/7890/silentjack_osc</a>
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>silentjack OSC is a derivate of "silentjack - Silence / Dead Air Detector":</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="http://www.aelius.com/njh/silentjack/">http://www.aelius.com/njh/silentjack/</a>
+</p>
+</li>
+</ul></div>
 </div>
 </div>
 <div class="sect1">
@@ -774,6 +790,25 @@ implement OSC in silentjack.</p></div>
 <div class="paragraph"><p>See example programs <tt>oscsend</tt> and <tt>oscdump</tt></p></div>
 <div class="paragraph"><p>A small modification will make the oscdump tool ready for shell hacks.
 <a href="https://gist.github.com/7890/8d83f887b9dc771dcb00">https://gist.github.com/7890/8d83f887b9dc771dcb00</a></p></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_installing_silentjack_osc">Installing silentjack (OSC)</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>If all prerequisites are met and the necessary build tools are available,
+it should be enough to do the following in a directory of choice:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>$ git clone git://github.com/7890/silentjack_osc.git
+$ cd silentjack_osc
+$ ./autogen.sh &amp;&amp; make &amp;&amp; sudo make install</tt></pre>
+</div></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_using_silentjack_osc">Using silentjack (OSC)</h2>
+<div class="sectionbody">
 <div class="paragraph"><p>Many applications are possilbe without using the OSC
 features of silentjack simply by using the <em>run command
 on silence</em> feature.</p></div>
@@ -802,17 +837,13 @@ Options:  -c &lt;port&gt;   Connect to this port
           -v          Enable verbose mode
           -q          Enable quiet mode
           -o &lt;port&gt;   Set OSC port for listening (default 7777, ? for random)
-          -H &lt;port&gt;   Set OSC host to send to (default 127.0.0.1)
+          -H &lt;host&gt;   Set OSC host to send to (default 127.0.0.1)
           -O &lt;port&gt;   Set OSC port to send to (default 7778)
           -X          Disable all OSC functions
           -h          Show help</tt></pre>
 </div></div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_osc_settings">OSC Settings</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_osc_settings">OSC Settings</h3>
 <div class="paragraph"><p>The following three settings define how OSC messages are processed.</p></div>
 <div class="ulist"><ul>
 <li>
@@ -881,19 +912,10 @@ Address of report host can be a broadcast address to serve all on subnet
 be read and set while the program is running via OSC.</p></div>
 </div>
 </div>
+</div>
 <div class="sect1">
 <h2 id="_messages_sent_by_silentjack">Messages sent by silentjack</h2>
 <div class="sectionbody">
-<div class="admonitionblock">
-<table><tr>
-<td class="icon">
-<div class="title">Important</div>
-</td>
-<td class="content">for all patterns, a client name <tt>silentjack</tt> is used.
-The patterns will differ if silentjack is started for instance with <tt>-n sj1</tt>.
-An answer would look like <tt>/sj1/...</tt> in that case.</td>
-</tr></table>
-</div>
 <div class="sect2">
 <h3 id="_silentjack_started">/silentjack/started</h3>
 <div class="listingblock">
@@ -913,7 +935,7 @@ Sent on event:
         silentjack ready for service after startup.
 
 Sent if:
-        not matter if verbose
+        (no restriction)
 
 Example:
         /silentjack/started ssiifi "silentjack" "7777" 5 0 -40.000000 1</tt></pre>
@@ -1029,7 +1051,7 @@ Sent on event:
         was started with a command argument (last option).
 
 Sent if:
-        no matter if verbose
+        (no restriction)
 
 Example:
         /silentjack/run_cmd sssss "silentjack" "7777" "/usr/local/bin/myscript.sh"</tt></pre>
@@ -1077,7 +1099,7 @@ Sent on event:
         silentjack was reconfigured or requested to tell the current configuration.
 
 Sent if:
-        no matter if verbose
+        (no restriction)
 
 Example:
         /silentjack/settings ssiifi "silentjack" "7777" 5 10 -40.000000 1</tt></pre>
@@ -1099,7 +1121,7 @@ Sent on event:
         This is normally caused by CTRL+C or sending the message `/silentjack/quit`.
 
 Sent if:
-        no matter if verbose
+        (no restriction)
 
 Example:
         /silentjack/quit ss "silentjack" "7777"</tt></pre>
@@ -1125,7 +1147,7 @@ requested answer from silentjack.</td>
 <div class="listingblock">
 <div class="content">
 <pre><tt>Message Pattern:
-        /silentjack/get_settings
+        /silentjack/get_settings s
 
 Parmeters:
         s: req_id
@@ -1150,7 +1172,7 @@ Reply:
 <div class="listingblock">
 <div class="content">
 <pre><tt>Message Pattern:
-        /silentjack/set_trigger_level f
+        /silentjack/set_trigger_level fs
 
 Parameters:
         f: trigger_level        [db]
@@ -1168,7 +1190,7 @@ Reply:
 <div class="listingblock">
 <div class="content">
 <pre><tt>Message Pattern:
-        /silentjack/set_silence_period i
+        /silentjack/set_silence_period is
 
 Parameters:
         i: silence_period       [sec]
@@ -1186,7 +1208,7 @@ Reply:
 <div class="listingblock">
 <div class="content">
 <pre><tt>Message Pattern:
-        /silentjack/set_grace_period i
+        /silentjack/set_grace_period is
 
 Parameters:
         i: grace_period         [sec]
@@ -1204,7 +1226,7 @@ Reply:
 <div class="listingblock">
 <div class="content">
 <pre><tt>Message Pattern:
-        /silentjack/verbose i
+        /silentjack/verbose is
 
 Parameters:
         i: is_verbose
@@ -1255,7 +1277,7 @@ localhost, port 7778.</p></div>
 <div class="paragraph"><p>If the audio level falls below <tt>-50</tt> dB (<tt>-l</tt>) for at least <tt>30</tt> seconds (<tt>-p</tt>).
 When silence is detected, evaluation will start again after a grace
 period of <tt>60</tt> seconds (<tt>-g</tt>).</p></div>
-<div class="paragraph"><p>The <tt>oscdump</tt> program is an example client of liblo and can be found there.
+<div class="paragraph"><p>The <tt>oscdump</tt> program is an example client of <tt>liblo</tt> and can be found there.
 It will dump all messages sent by silentjack.</p></div>
 <div class="listingblock">
 <div class="content">
@@ -1277,11 +1299,55 @@ drive fade-in / fade-out by precedence rules over an array of inputs.</p></div>
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_download_links">Download Links</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Download this document (.pdf):</p></div>
+<div class="paragraph"><p><span class="image">
+<img alt="https://github.com/7890/silentjack_osc/blob/master/asciidoc/silentjack_osc.pdf?raw=true" src="data:image/png;base64,
+iVBORw0KGgoAAAANSUhEUgAAAIcAAACHAQAAAAAUnHenAAABqUlEQVRIid2WQY6EIBBFq8OCnV6A
+hGu440p6AVsvoFdixzVMvIDuWBBqPtp2JrPpMpnFZAgLeSZY8PkfiX82+idkI+rdUrnUUyKyQrJz
+ahvz9MuT05PFxBvM8PDHK32DtE3qopqDuUWegSqH4tMNwqkLPAbL0bxX8ZFgf7pgzv7esY/kaIa0
+6Rv7TZ0PZKMy7CLVQU2NlDDb7HgoCnImKckaQtiB1OBMdeyPhHBcd48a1uwSnV8XkE0biM6l5peC
+MqImp0bGMVOzZyHZw9I6dGqJULyQZFJjwDJL2YOTks3RpYXdtJzg4dRiqc9VCEhulp7spFVurpoF
+ZA94TlXDgy5nQEgyAgH81IKkBPNwcRw8bufIQsJwHCNGePY4NlZIsluLFkUIHllK2FN1aPG4apYQ
+nLE9QIsyPL0jIbtPj2hhhBHFRysmdvTIK7U1VyJJSDB1PL2DsllI0DZdFts7u7OUIOuKdwjhg1i2
+QrKXawLDhfRrHhFB8kMLv84BJrI3iOPJlRjZ6A4hO8ZigcmJCYTzqQ4IunVmKSn3RcRsVEe4W0p+
+66/gb5Ev1IOwV8rRcucAAAAASUVORK5CYII=" />
+</span></p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="https://github.com/7890/silentjack_osc/blob/master/asciidoc/silentjack_osc.pdf?raw=true">https://github.com/7890/silentjack_osc/blob/master/asciidoc/silentjack_osc.pdf?raw=true</a>
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>Download silentjack_osc (.zip):</p></div>
+<div class="paragraph"><p><span class="image">
+<img alt="https://github.com/7890/silentjack_osc/archive/master.zip" src="data:image/png;base64,
+iVBORw0KGgoAAAANSUhEUgAAAHsAAAB7AQAAAAB8vMLSAAABbUlEQVRIidXVMW7EIBAF0LEo3K0v
+gMQ16Hyl5QJgX2C5Eh3XsOQLrDsK5MlnN5uV0jCRUiTIhfUKhP/MYOJvi/4z3IlCVrdZh0SDDA6u
+Lm8XvGS8yyDpwCrmbcjkxHAd9ZRgPwA/822uQQ5cr9bcaF/fR+8A8nBZt+cdUAewTqr4svAuQwfu
+pMnyUehi9yiEWa2ZCIXKdZDBSXrK28TYRkUhWHWwOueK7IMMjqL9iDDUYhULgc3KKBSMVxkgD1cM
+J/JkogzOll91ZfNUgwwY7dDOuy/2uUcf7ugdpsuoh7yvQrDk5w3bLONnbbvArDgjdRT5ddIenFZP
+rENBuV559AADvbQB+jqpANLmrTlpRyRRCBlVQoeqWChIofqWOhGZQwZYB7dpcPy8DPrQJpu3IWGM
+VJQB7g8/q5jaTk4Ij4vNFbqSYTG4xzSE8lkoESSzFrOMWxAC7vVUkd9ipYA82jQw+VfjduE3fmt/
+Az4AYK1XGrFkoHAAAAAASUVORK5CYII=" />
+</span></p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="https://github.com/7890/silentjack_osc/archive/master.zip">https://github.com/7890/silentjack_osc/archive/master.zip</a>
+</p>
+</li>
+</ul></div>
+</div>
+</div>
 </div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2013-05-30 00:56:54 CEST
+Last updated 2013-06-28 22:06:26 CEST
 </div>
 </div>
 </body>
